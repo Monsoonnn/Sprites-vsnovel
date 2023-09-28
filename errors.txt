@@ -2,9 +2,9 @@
 errors listed below, and try again.
 
 
-File "game/define.rpy", line 22: end of line expected.
-    image ctc: "gui/ctc.png"
-               ^
+File "game/transition.rpy", line 7: iterable argument unpacking follows keyword argument unpacking
+    Dissolve(1, *, alpha=False, time_warp=None, mipmap=None)
+                  ^
 
 Ren'Py Version: Ren'Py 8.1.1.23060707
-Thu Sep 28 20:53:08 2023
+Fri Sep 29 00:15:45 2023

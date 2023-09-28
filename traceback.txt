@@ -1,36 +1,28 @@
 ﻿I'm sorry, but an uncaught exception occurred.
 
 While running game code:
-  File "game/sceen_ch0.rpy", line 6, in script
-    play music sc0
-  File "renpy/common/000statements.rpy", line 123, in execute_play_music
-    renpy.music.play(_audio_eval(p["file"]),
-Exception: Parsing audio spec '<loop>bgm/sc0_m.mp3': expected float at end..
+  File "game/sceen_ch0.rpy", line 9, in script
+    scene bg sc0_2 with easein(1.0)
+  File "game/sceen_ch0.rpy", line 9, in <module>
+    scene bg sc0_2 with easein(1.0)
+NameError: name 'easein' is not defined
 
 -- Full Traceback ------------------------------------------------------------
 
 Full traceback:
-  File "game/sceen_ch0.rpy", line 6, in script
-    play music sc0
-  File "E:\renpy-8.1.1-sdk\renpy\ast.py", line 2259, in execute
-    self.call("execute")
-  File "E:\renpy-8.1.1-sdk\renpy\ast.py", line 2241, in call
-    return renpy.statements.call(method, parsed, *args, **kwargs)
-  File "E:\renpy-8.1.1-sdk\renpy\statements.py", line 342, in call
-    return method(parsed, *args, **kwargs)
-  File "renpy/common/000statements.rpy", line 123, in execute_play_music
-    renpy.music.play(_audio_eval(p["file"]),
-  File "E:\renpy-8.1.1-sdk\renpy\audio\music.py", line 131, in play
-    c.enqueue(filenames, loop=loop, synchro_start=synchro_start, fadein=fadein, tight=tight, relative_volume=relative_volume)
-  File "E:\renpy-8.1.1-sdk\renpy\audio\audio.py", line 676, in enqueue
-    filename, _, _ = self.split_filename(filename, False)
-  File "E:\renpy-8.1.1-sdk\renpy\audio\audio.py", line 410, in split_filename
-    loop = expect_float()
-  File "E:\renpy-8.1.1-sdk\renpy\audio\audio.py", line 359, in expect_float
-    raise exception("expected float at end.")
-Exception: Parsing audio spec '<loop>bgm/sc0_m.mp3': expected float at end..
+  File "game/sceen_ch0.rpy", line 9, in script
+    scene bg sc0_2 with easein(1.0)
+  File "E:\renpy-8.1.1-sdk\renpy\ast.py", line 1674, in execute
+    paired = renpy.python.py_eval(self.paired)
+  File "E:\renpy-8.1.1-sdk\renpy\python.py", line 1153, in py_eval
+    return py_eval_bytecode(code, globals, locals)
+  File "E:\renpy-8.1.1-sdk\renpy\python.py", line 1146, in py_eval_bytecode
+    return eval(bytecode, globals, locals)
+  File "game/sceen_ch0.rpy", line 9, in <module>
+    scene bg sc0_2 with easein(1.0)
+NameError: name 'easein' is not defined
 
 Windows-10-10.0.19045 AMD64
 Ren'Py 8.1.1.23060707
 Sprites 1.0
-Thu Sep 28 21:41:48 2023
+Fri Sep 29 00:37:06 2023
