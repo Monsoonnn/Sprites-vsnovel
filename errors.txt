@@ -1,0 +1,10 @@
+﻿I'm sorry, but errors were detected in your script. Please correct the
+errors listed below, and try again.
+
+
+File "game/define.rpy", line 22: end of line expected.
+    image ctc: "gui/ctc.png"
+               ^
+
+Ren'Py Version: Ren'Py 8.1.1.23060707
+Thu Sep 28 20:53:08 2023

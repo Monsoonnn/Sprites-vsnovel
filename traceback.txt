@@ -1,0 +1,29 @@
+﻿I'm sorry, but an uncaught exception occurred.
+
+While running game code:
+  File "game/sceen_ch0.rpy", line 14, in script
+    v "Vâng ạ!"
+NameError: name 's_name' is not defined
+
+-- Full Traceback ------------------------------------------------------------
+
+Full traceback:
+  File "game/sceen_ch0.rpy", line 14, in script
+    v "Vâng ạ!"
+  File "E:\renpy-8.1.1-sdk\renpy\ast.py", line 930, in execute
+    renpy.exports.say(who, what, *args, **kwargs)
+  File "E:\renpy-8.1.1-sdk\renpy\exports.py", line 1473, in say
+    who(what, *args, **kwargs)
+  File "E:\renpy-8.1.1-sdk\renpy\character.py", line 1332, in __call__
+    who = renpy.python.py_eval(who)
+  File "E:\renpy-8.1.1-sdk\renpy\python.py", line 1153, in py_eval
+    return py_eval_bytecode(code, globals, locals)
+  File "E:\renpy-8.1.1-sdk\renpy\python.py", line 1146, in py_eval_bytecode
+    return eval(bytecode, globals, locals)
+  File "<none>", line 1, in <module>
+NameError: name 's_name' is not defined
+
+Windows-10-10.0.19045 AMD64
+Ren'Py 8.1.1.23060707
+Sprites 1.0
+Thu Sep 28 21:07:33 2023
