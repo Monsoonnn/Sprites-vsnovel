@@ -3,7 +3,7 @@ default chapter = 0
 
 ## End of variables
 ## audio
-define audio.sc0 = "<loop 22.073>bgm/sc0_m.mp3"
+define audio.sc0 = "bgm/sc0_m.mp3"
 ## End of audio
 # image background
 image bg sc0_1 = "bg_sc0/1.png"
@@ -14,6 +14,7 @@ image bg sc0_5 = "bg_sc0/5.png"
 image bg sc0_6 = "bg_sc0/6.png"
 image bg sc0_7 = "bg_sc0/7.png"
 image bg sc0_8 = "bg_sc0/8.png"
+image bg sc0_9 = "bg_sc0/9.png"
 # image background
 ## image character
 
