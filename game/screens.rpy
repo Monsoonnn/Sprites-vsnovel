@@ -197,13 +197,6 @@ style input:
     xmaximum gui.dialogue_width
 
 
-## Choice screen ###############################################################
-##
-## This screen is used to display the in-game choices presented by the menu
-## statement. The one parameter, items, is a list of objects, each with caption
-## and action fields.
-##
-## https://www.renpy.org/doc/html/screen_special.html#choice
 
 screen choice(items):
     style_prefix "choice"
@@ -219,8 +212,7 @@ style choice_button_text is button_text
 
 style choice_vbox:
     xalign 0.5
-    ypos 405
-    yanchor 0.5
+    yalign 0.5
 
     spacing gui.choice_spacing
 
@@ -1605,3 +1597,11 @@ style slider_vbox:
 style slider_slider:
     variant "small"
     xsize 900
+
+
+style splash_text:
+    size 32
+    color "#000"
+    font gui.text_font
+    text_align 0.5
+    outlines []
