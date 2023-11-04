@@ -97,16 +97,15 @@ style frame:
 
 screen say(who, what):
     style_prefix "say"
-
     window:
         id "window"
-
+        
         if who is not None:
 
             window:
                 id "namebox"
                 style "namebox"
-                text who id "who"
+                text who id "who" 
 
         text what id "what"
 
@@ -136,26 +135,27 @@ style window:
     yalign gui.textbox_yalign
     ysize gui.textbox_height
 
-    background Image("gui/textbox.png", xalign=0.5, yalign=1.0)
+    background Image("gui/textbox.png", xalign=0.5, yalign=0.8)
 
 style namebox:
     xpos gui.name_xpos
     xanchor gui.name_xalign
-    xsize gui.namebox_width
+    xsize 351
     ypos gui.name_ypos
-    ysize gui.namebox_height
+    ysize 109
 
     background Frame("gui/namebox.png", gui.namebox_borders, tile=gui.namebox_tile, xalign=gui.name_xalign)
     padding gui.namebox_borders.padding
 
 style say_label:
     properties gui.text_properties("name", accent=True)
-    xalign gui.name_xalign
+    xalign 0.4
     yalign 0.5
 
 style say_dialogue:
     properties gui.text_properties("dialogue")
-
+    font gui.text_dialoge
+    
     xpos gui.dialogue_xpos
     xsize gui.dialogue_width
     ypos gui.dialogue_ypos
@@ -241,14 +241,15 @@ screen quick_menu():
             xalign 0.5
             yalign 1.0
 
-            textbutton _("Back") action Rollback()
-            textbutton _("History") action ShowMenu('history')
-            textbutton _("Skip") action Skip() alternate Skip(fast=True, confirm=True)
-            textbutton _("Auto") action Preference("auto-forward", "toggle")
-            textbutton _("Save") action ShowMenu('save')
-            textbutton _("Q.Save") action QuickSave()
-            textbutton _("Q.Load") action QuickLoad()
-            textbutton _("Prefs") action ShowMenu('preferences')
+            textbutton _("Quay lại") action Rollback()
+            textbutton _("Bỏ qua") action Skip() alternate Skip(fast=True, confirm=True)
+            textbutton _("Lịch sử") action ShowMenu('history')
+            textbutton _("Tự động") action Preference("auto-forward", "toggle")
+            textbutton _("Lưu") action ShowMenu('save')
+            textbutton _("Lưu nhanh") action QuickSave()
+            textbutton _("Từ bỏ") action MainMenu()
+            # textbutton _("Q.Load") action QuickLoad()
+            textbutton _("Cài đặt") action ShowMenu('preferences')
 
 
 ## This code ensures that the quick_menu screen is displayed in-game, whenever
@@ -263,9 +264,16 @@ style quick_button_text is button_text
 
 style quick_button:
     properties gui.button_properties("quick_button")
+    color gui.text_color
 
 style quick_button_text:
     properties gui.button_text_properties("quick_button")
+    selected_color gui.selected_color
+    font gui.text_font
+    size gui.text_quick_size
+    spacing gui.navigation_spacing
+    ypadding 50
+    outlines [(1, "#887F7F", 0, 0)]
 
 
 ################################################################################
@@ -277,61 +285,28 @@ style quick_button_text:
 ## This screen is included in the main and game menus, and provides navigation
 ## to other menus, and to start the game.
 
-screen navigation():
 
-    vbox:
-        style_prefix "navigation"
-
-        xpos gui.navigation_xpos
-        yalign 0.5
-
-        spacing gui.navigation_spacing
-
-        if main_menu:
-
-            textbutton _("Start") action Start()
-
-        else:
-
-            textbutton _("History") action ShowMenu("history")
-
-            textbutton _("Save") action ShowMenu("save")
-
-        textbutton _("Load") action ShowMenu("load")
-
-        textbutton _("Preferences") action ShowMenu("preferences")
-
-        if _in_replay:
-
-            textbutton _("End Replay") action EndReplay(confirm=True)
-
-        elif not main_menu:
-
-            textbutton _("Main Menu") action MainMenu()
-
-        textbutton _("About") action ShowMenu("about")
-
-        if renpy.variant("pc") or (renpy.variant("web") and not renpy.variant("mobile")):
-
-            ## Help isn't necessary or relevant to mobile devices.
-            textbutton _("Help") action ShowMenu("help")
-
-        if renpy.variant("pc"):
-
-            ## The quit button is banned on iOS and unnecessary on Android and
-            ## Web.
-            textbutton _("Quit") action Quit(confirm=not main_menu)
+    
 
 
+        
+            
+
+style back is button
 style navigation_button is gui_button
 style navigation_button_text is gui_button_text
 
 style navigation_button:
-    size_group "navigation"
+    # size_group "navigation"
     properties gui.button_properties("navigation_button")
 
 style navigation_button_text:
+ 
     properties gui.button_text_properties("navigation_button")
+    font gui.text_dialoge
+    bold True
+    outlines [(2, "#000000", 0, 0)]
+    kerning 3.0
 
 
 ## Main Menu screen ############################################################
@@ -350,21 +325,37 @@ screen main_menu():
     ## This empty frame darkens the main menu.
     frame:
         style "main_menu_frame"
+    hbox:
+        style_prefix "navigation"
+        xalign 0.5
+        yalign 0.9
 
+        spacing gui.navigation_spacing
+
+        if main_menu:
+            
+            textbutton _("Bắt đầu") action Start()
+            textbutton _("Tiếp tục") action ShowMenu("load")
+            textbutton _("Cài đặt") action ShowMenu("preferences")
+            textbutton _("Trợ giúp") action ShowMenu("help")
+            textbutton _("Thoát") action Quit(confirm=not main_menu)
+        else:
+
+            vbox:
+                
+                xpos gui.navigation_xpos
+                ypos -800
+
+                textbutton __("     "):
+                    style "back"
+                    action Return()
+
+            if _in_replay:       
+                vbox: 
+                    textbutton _("End Replay") action EndReplay(confirm=True)
     ## The use statement includes another screen inside this one. The actual
     ## contents of the main menu are in the navigation screen.
-    use navigation
-
-    if gui.show_name:
-
-        vbox:
-            style "main_menu_vbox"
-
-            text "[config.name!t]":
-                style "main_menu_title"
-
-            text "[config.version]":
-                style "main_menu_version"
+    # use navigation
 
 
 style main_menu_frame is empty
@@ -376,8 +367,6 @@ style main_menu_version is main_menu_text
 style main_menu_frame:
     xsize 420
     yfill True
-
-    background "gui/overlay/main_menu.png"
 
 style main_menu_vbox:
     xalign 1.0
@@ -404,7 +393,7 @@ style main_menu_version:
 ## The scroll parameter can be None, or one of "viewport" or "vpgrid".
 ## This screen is intended to be used with one or more children, which are
 ## transcluded (placed) inside it.
-
+image button_back = "./gui/overlay/back.png"
 screen game_menu(title, scroll=None, yinitial=0.0):
 
     style_prefix "game_menu"
@@ -413,16 +402,18 @@ screen game_menu(title, scroll=None, yinitial=0.0):
         add gui.main_menu_background
     else:
         add gui.game_menu_background
-
+    
     frame:
         style "game_menu_outer_frame"
-
+        imagebutton:
+            xpos 0.08
+            ypos 0.1
+            xanchor 0.5
+            yanchor 0.5
+            idle "gui/overlay/back.png"
+            action Return()
         hbox:
-
-            ## Reserve space for the navigation section.
-            frame:
-                style "game_menu_navigation_frame"
-
+           
             frame:
                 style "game_menu_content_frame"
 
@@ -446,7 +437,7 @@ screen game_menu(title, scroll=None, yinitial=0.0):
                         cols 1
                         yinitial yinitial
 
-                        scrollbars "vertical"
+                        # scrollbars "vertical"
                         mousewheel True
                         draggable True
                         pagekeys True
@@ -459,7 +450,7 @@ screen game_menu(title, scroll=None, yinitial=0.0):
 
                     transclude
 
-    use navigation
+    # use navigation
 
     textbutton _("Return"):
         style "return_button"
@@ -486,36 +477,36 @@ style return_button is navigation_button
 style return_button_text is navigation_button_text
 
 style game_menu_outer_frame:
-    bottom_padding 45
-    top_padding 180
 
     background "gui/overlay/game_menu.png"
 
 style game_menu_navigation_frame:
-    xsize 420
-    yfill True
+    xsize 0
+    yfill 0
 
 style game_menu_content_frame:
-    left_margin 60
-    right_margin 30
-    top_margin 15
+    left_margin 0
+    right_margin 0
+    top_margin 165
 
 style game_menu_viewport:
-    xsize 1380
+    xsize 1920
 
 style game_menu_vscrollbar:
+    # xpos -100
     unscrollable gui.unscrollable
 
 style game_menu_side:
     spacing 15
 
 style game_menu_label:
-    xpos 75
-    ysize 180
+    ysize 120
+    xalign 0.5
+    yalign 0.03
 
 style game_menu_label_text:
-    size gui.title_text_size
-    color gui.accent_color
+    size gui.title_text_size_big
+    color gui.text_color
     yalign 0.5
 
 style return_button:
@@ -531,35 +522,35 @@ style return_button:
 ## There's nothing special about this screen, and hence it also serves as an
 ## example of how to make a custom screen.
 
-screen about():
+# screen about():
 
-    tag menu
+#     tag menu
 
-    ## This use statement includes the game_menu screen inside this one. The
-    ## vbox child is then included inside the viewport inside the game_menu
-    ## screen.
-    use game_menu(_("About"), scroll="viewport"):
+#     ## This use statement includes the game_menu screen inside this one. The
+#     ## vbox child is then included inside the viewport inside the game_menu
+#     ## screen.
+#     use game_menu(_("About"), scroll="viewport"):
 
-        style_prefix "about"
+#         style_prefix "about"
 
-        vbox:
+#         vbox:
 
-            label "[config.name!t]"
-            text _("Version [config.version!t]\n")
+#             # label "[config.name!t]"
+#             # text _("Version [config.version!t]\n")
 
-            ## gui.about is usually set in options.rpy.
-            if gui.about:
-                text "[gui.about!t]\n"
+#             ## gui.about is usually set in options.rpy.
+#             # if gui.about:
+#             #     text "[gui.about!t]\n"
 
-            text _("Made with {a=https://www.renpy.org/}Ren'Py{/a} [renpy.version_only].\n\n[renpy.license!t]")
+#             # text _("Made with {a=https://www.renpy.org/}Ren'Py{/a} [renpy.version_only].\n\n[renpy.license!t]")
 
 
-style about_label is gui_label
-style about_label_text is gui_label_text
-style about_text is gui_text
+# style about_label is gui_label
+# style about_label_text is gui_label_text
+# style about_text is gui_text
 
-style about_label_text:
-    size gui.label_text_size
+# style about_label_text:
+#     size gui.label_text_size
 
 
 ## Load and Save screens #######################################################
@@ -575,29 +566,25 @@ screen save():
 
     tag menu
 
-    use file_slots(_("Save"))
+    use file_slots(_("Lưu"))
 
 
 screen load():
 
     tag menu
 
-    use file_slots(_("Load"))
+    use file_slots(_("Tải"))
 
 
 screen file_slots(title):
 
-    default page_name_value = FilePageNameInputValue(pattern=_("Page {}"), auto=_("Automatic saves"), quick=_("Quick saves"))
+    default page_name_value = FilePageNameInputValue(pattern=_(""), auto=_("Tự động lưu"), quick=_("Lưu nhanh"))
 
     use game_menu(title):
 
         fixed:
-
-            ## This ensures the input will get the enter event before any of the
-            ## buttons do.
             order_reverse True
 
-            ## The page name, which can be edited by clicking on a button.
             button:
                 style "page_label"
 
@@ -609,7 +596,6 @@ screen file_slots(title):
                     style "page_label_text"
                     value page_name_value
 
-            ## The grid of file slots.
             grid gui.file_slot_cols gui.file_slot_rows:
                 style_prefix "slot"
 
@@ -621,20 +607,20 @@ screen file_slots(title):
                 for i in range(gui.file_slot_cols * gui.file_slot_rows):
 
                     $ slot = i + 1
-
+                    
                     button:
                         action FileAction(slot)
 
                         has vbox
-
+                        
                         add FileScreenshot(slot) xalign 0.5
 
-                        text FileTime(slot, format=_("{#file_time}%A, %B %d %Y, %H:%M"), empty=_("empty slot")):
+                        text FileTime(slot, format=_("{#file_time}%A, %B %d %Y, %H:%M"), empty=_("")):
                             style "slot_time_text"
 
                         text FileSaveName(slot):
                             style "slot_name_text"
-
+                        
                         key "save_delete" action FileDelete(slot)
 
             ## Buttons to access other pages.
@@ -645,33 +631,45 @@ screen file_slots(title):
                 yalign 1.0
 
                 hbox:
-                    xalign 0.5
-
+                    # xalign 0.5
+                    # ypos 40
                     spacing gui.page_spacing
 
-                    textbutton _("<") action FilePagePrevious()
+                    textbutton _("<"):
+                        background "./gui/overlay/history_page_but.png"
+                        action FilePagePrevious()
 
                     if config.has_autosave:
-                        textbutton _("{#auto_page}A") action FilePage("auto")
+                        textbutton _("{#auto_page}A"):
+                            background "./gui/overlay/history_page_but.png"
+                            action FilePage("auto")
 
                     if config.has_quicksave:
-                        textbutton _("{#quick_page}Q") action FilePage("quick")
+                        textbutton _("{#quick_page}Q"):
+                            background "./gui/overlay/history_page_but.png"
+                            action FilePage("quick")
 
                     ## range(1, 10) gives the numbers from 1 to 9.
                     for page in range(1, 10):
-                        textbutton "[page]" action FilePage(page)
+                        textbutton "[page]":
+                            background "./gui/overlay/history_page_but.png"
+                            action FilePage(page)
+                        
 
                     textbutton _(">") action FilePageNext()
 
-                if config.has_sync:
-                    if CurrentScreenName() == "save":
-                        textbutton _("Upload Sync"):
-                            action UploadSync()
-                            xalign 0.5
-                    else:
-                        textbutton _("Download Sync"):
-                            action DownloadSync()
-                            xalign 0.5
+                # if config.has_sync:
+  
+                #     if CurrentScreenName() == "save":
+                #         textbutton _("Upload Sync"):
+                #             action UploadSync()
+                #             xalign 0.5
+                        
+                          
+                #     else:
+                #         textbutton _("Download Sync"):
+                #             action DownloadSync()
+                #             xalign 0.5
 
 
 style page_label is gui_label
@@ -686,24 +684,33 @@ style slot_name_text is slot_button_text
 
 style page_label:
     xpadding 75
-    ypadding 5
+    ypadding 20
 
 style page_label_text:
     textalign 0.5
     layout "subtitle"
-    hover_color gui.hover_color
+    size gui.text_size
+    color gui.text_color
+    
 
 style page_button:
     properties gui.button_properties("page_button")
 
 style page_button_text:
     properties gui.button_text_properties("page_button")
+    color gui.text_color
+    hover_color gui.hover_color
+    selected_color gui.selected_color
+
 
 style slot_button:
     properties gui.button_properties("slot_button")
 
 style slot_button_text:
     properties gui.button_text_properties("slot_button")
+    size gui.text_time_size
+ 
+    
 
 
 ## Preferences screen ##########################################################
@@ -717,27 +724,29 @@ screen preferences():
 
     tag menu
 
-    use game_menu(_("Preferences"), scroll="viewport"):
+    use game_menu(_("Cài đặt"), scroll="viewport"):
 
         vbox:
-
+            xpos 0.25
+            ypos 0.1
+            
             hbox:
                 box_wrap True
-
                 if renpy.variant("pc") or renpy.variant("web"):
 
                     vbox:
                         style_prefix "radio"
-                        label _("Display")
-                        textbutton _("Window") action Preference("display", "window")
-                        textbutton _("Fullscreen") action Preference("display", "fullscreen")
+                        label _("Hiển thị")
+                        textbutton _("Cửa sổ") action Preference("display", "window")
+                        textbutton _("Toàn màn hình") action Preference("display", "fullscreen")
+                    
+                    vbox:
 
-                vbox:
-                    style_prefix "check"
-                    label _("Skip")
-                    textbutton _("Unseen Text") action Preference("skip", "toggle")
-                    textbutton _("After Choices") action Preference("after choices", "toggle")
-                    textbutton _("Transitions") action InvertSelected(Preference("transitions", "toggle"))
+                        style_prefix "check"
+                        label _("Bỏ qua")
+                        textbutton _("Thoại chưa đọc") action Preference("skip", "toggle")
+                        textbutton _("Sau mỗi lựa chọn") action Preference("after choices", "toggle")
+                        textbutton _("Hiệu ứng chuyển cảnh") action InvertSelected(Preference("transitions", "toggle"))
 
                 ## Additional vboxes of type "radio_pref" or "check_pref" can be
                 ## added here, to add additional creator-defined preferences.
@@ -750,25 +759,25 @@ screen preferences():
 
                 vbox:
 
-                    label _("Text Speed")
+                    label _("Tốc độ văn bản")
 
                     bar value Preference("text speed")
 
-                    label _("Auto-Forward Time")
+                    label _("Tốc độ tự đọc")
 
                     bar value Preference("auto-forward time")
 
                 vbox:
 
                     if config.has_music:
-                        label _("Music Volume")
+                        label _("Âm lượng nhạc nền")
 
                         hbox:
                             bar value Preference("music volume")
 
                     if config.has_sound:
 
-                        label _("Sound Volume")
+                        label _("Âm lượng hiệu ứng")
 
                         hbox:
                             bar value Preference("sound volume")
@@ -777,21 +786,14 @@ screen preferences():
                                 textbutton _("Test") action Play("sound", config.sample_sound)
 
 
-                    if config.has_voice:
-                        label _("Voice Volume")
+                    
 
-                        hbox:
-                            bar value Preference("voice volume")
+                    # if config.has_music or config.has_sound or config.has_voice:
+                    #     null height gui.pref_spacing
 
-                            if config.sample_voice:
-                                textbutton _("Test") action Play("voice", config.sample_voice)
-
-                    if config.has_music or config.has_sound or config.has_voice:
-                        null height gui.pref_spacing
-
-                        textbutton _("Mute All"):
-                            action Preference("all mute", "toggle")
-                            style "mute_all_button"
+                    #     textbutton _("Tắt tiếng"):
+                    #         action Preference("all mute", "toggle")
+                    #         style "mute_all_button"
 
 
 style pref_label is gui_label
@@ -823,33 +825,40 @@ style mute_all_button_text is check_button_text
 style pref_label:
     top_margin gui.pref_spacing
     bottom_margin 3
+    
 
 style pref_label_text:
     yalign 1.0
+    color gui.text_settings
+    size gui.text_label_settings
 
 style pref_vbox:
-    xsize 338
+    xsize 650
 
 style radio_vbox:
-    spacing gui.pref_button_spacing
+    ysize 200
 
 style radio_button:
     properties gui.button_properties("radio_button")
     foreground "gui/button/radio_[prefix_]foreground.png"
+    selected_color gui.hover_color
 
 style radio_button_text:
     properties gui.button_text_properties("radio_button")
-
+    color gui.idle_text_color
+    hover_color gui.hover_color
 style check_vbox:
     spacing gui.pref_button_spacing
 
 style check_button:
     properties gui.button_properties("check_button")
     foreground "gui/button/check_[prefix_]foreground.png"
-
+    hover_color gui.hover_color
 style check_button_text:
     properties gui.button_text_properties("check_button")
-
+    color gui.idle_text_color
+    hover_color gui.hover_color
+    selected_color gui.hover_color
 style slider_slider:
     xsize 525
 
@@ -860,6 +869,8 @@ style slider_button:
 
 style slider_button_text:
     properties gui.button_text_properties("slider_button")
+    
+    
 
 style slider_vbox:
     xsize 675
@@ -880,13 +891,14 @@ screen history():
     ## Avoid predicting this screen, as it can be very large.
     predict False
 
-    use game_menu(_("History"), scroll=("vpgrid" if gui.history_height else "viewport"), yinitial=1.0):
+    use game_menu(_("Lịch sử"), scroll=("vpgrid" if gui.history_height else "viewport"), yinitial=1.0):
 
         style_prefix "history"
 
         for h in _history_list:
 
             window:
+                
 
                 ## This lays things out properly if history_height is None.
                 has fixed:
@@ -929,15 +941,20 @@ style history_window:
     xfill True
     ysize gui.history_height
 
+
 style history_name:
+    
     xpos gui.history_name_xpos
     xanchor gui.history_name_xalign
     ypos gui.history_name_ypos
     xsize gui.history_name_width
+    
 
 style history_name_text:
+    ypos 10
     min_width gui.history_name_width
     textalign gui.history_name_xalign
+    outlines [(0.5, "#000000", 0.5, 0.5)]
 
 style history_text:
     xpos gui.history_text_xpos
@@ -947,12 +964,17 @@ style history_text:
     min_width gui.history_text_width
     textalign gui.history_text_xalign
     layout ("subtitle" if gui.history_text_xalign else "tex")
+    color gui.text_color
+    size gui.text_history_size
 
 style history_label:
     xfill True
+    color gui.text_idle_color
+    
 
 style history_label_text:
     xalign 0.5
+    
 
 
 ## Help screen #################################################################
@@ -967,13 +989,15 @@ screen help():
 
     default device = "keyboard"
 
-    use game_menu(_("Help"), scroll="viewport"):
+    use game_menu(_("Hướng dẫn"), scroll="viewport"):
 
         style_prefix "help"
-
+        
         vbox:
+            xpos 250
+            ypos 50
             spacing 23
-
+            
             hbox:
 
                 textbutton _("Keyboard") action SetScreenVariable("device", "keyboard")
@@ -1065,7 +1089,7 @@ screen mouse_help():
 
 
 screen gamepad_help():
-
+    
     hbox:
         label _("Right Trigger\nA/Bottom Button")
         text _("Advances dialogue and activates the interface.")
@@ -1102,18 +1126,21 @@ style help_text is gui_text
 
 style help_button:
     properties gui.button_properties("help_button")
-    xmargin 12
+
+    xmargin 120
 
 style help_button_text:
     properties gui.button_text_properties("help_button")
+    color gui.text_color
 
 style help_label:
     xsize 375
     right_padding 30
 
 style help_label_text:
-    size gui.text_size
-    xalign 1.0
+    size gui.text_help_size
+    xalign 0.5
+    color gui.text_color
     textalign 1.0
 
 
@@ -1442,7 +1469,7 @@ style bubble_namebox:
 style bubble_who:
     xalign 0.5
     textalign 0.5
-    color "#000"
+    color "#fff"
 
 style bubble_what:
     align (0.5, 0.5)
@@ -1536,11 +1563,10 @@ style nvl_window:
 
 style main_menu_frame:
     variant "small"
-    background "gui/phone/overlay/main_menu.png"
 
 style game_menu_outer_frame:
     variant "small"
-    background "gui/phone/overlay/game_menu.png"
+
 
 style game_menu_navigation_frame:
     variant "small"

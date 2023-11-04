@@ -138,6 +138,8 @@ label begin_main:
         "Đi đến điểm hẹn và báo cáo lại cho Hiệp hội.":
             call op1
         "Vào bên trong trường":
-            return
+            call op2
+
+            
 return
 

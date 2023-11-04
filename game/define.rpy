@@ -33,6 +33,20 @@ image bg sc1_2 = "bg_sc1/64.png"
 image bg sc1_3 = "bg_sc1/2.png"
 image bg sc1_31 = "bg_sc1/31.png"
 image bg sc1_4 = "bg_sc1/66.png"
+
+image bg op1_1 = "bg_op/69.png"
+image bg op1_2 = "bg_op/68.png"
+image bg op1_3 = "bg_op/76.png"
+image bg op1_4 = "bg_op/77.png"
+image bg op1_5 = "bg_op/78.png"
+image bg op1_6 = "bg_op/79.png"
+image bg op1_7 = "bg_op/75.png"
+image bg op1_8 = "bg_op/80.png"
+
+image bg op2_1 = "bg_op/70.png"
+image bg op2_2 = "bg_op/81.png"
+image bg op2_3 = "bg_op/82.png"
+
 # image background
 
 
@@ -59,7 +73,7 @@ image la4 = SnowBlossom("images/bg_sc1/la4.png", count=2, border=50, xspeed=(50,
 
 #click to continue
 image ctc:
-        xpos 1280 ypos 1020
+        xpos 1580 ypos 950
         alpha 2.0
         "gui/ctc.png"
         0.5
@@ -68,9 +82,9 @@ image ctc:
         repeat
 #click to continue
 define narrator = Character(ctc="ctc", ctc_position="fixed")
-define v = DynamicCharacter('v_name', image='v', what_prefix='"', what_suffix='"', ctc="ctc", ctc_position="fixed")
+define v = DynamicCharacter('v_name', image='v', what_prefix='"', what_suffix='"', ctc="ctc", ctc_position="fixed",color="#fff")
 define none = DynamicCharacter('none', image='n', what_prefix='"', what_suffix='"', ctc="ctc", ctc_position="fixed")
-define n = DynamicCharacter('n_name', image='v', what_prefix='"', what_suffix='"', ctc="ctc", ctc_position="fixed")
+define n = DynamicCharacter('n_name', image='v', what_prefix='"', what_suffix='"', ctc="ctc", ctc_position="fixed", color="#fff")
 
 
 default v_name = "Việt"

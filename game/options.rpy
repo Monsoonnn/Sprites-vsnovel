@@ -194,6 +194,8 @@ init python:
     build.documentation('*.html')
     build.documentation('*.txt')
 
+init python:
+    config.has_autosave = False
 
 ## A Google Play license key is required to perform in-app purchases. It can be
 ## found in the Google Play developer console, under "Monetize" > "Monetization
