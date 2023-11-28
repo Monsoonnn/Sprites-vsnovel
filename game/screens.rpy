@@ -135,7 +135,7 @@ style window:
     yalign gui.textbox_yalign
     ysize gui.textbox_height
 
-    background Image("gui/textbox.png", xalign=0.5, yalign=0.8)
+    background Image("gui/textbox.png", xalign=0.6, yalign=0.8)
 
 style namebox:
     xpos gui.name_xpos
@@ -275,23 +275,6 @@ style quick_button_text:
     ypadding 50
     outlines [(1, "#887F7F", 0, 0)]
 
-
-################################################################################
-## Main and Game Menu Screens
-################################################################################
-
-## Navigation screen ###########################################################
-##
-## This screen is included in the main and game menus, and provides navigation
-## to other menus, and to start the game.
-
-
-    
-
-
-        
-            
-
 style back is button
 style navigation_button is gui_button
 style navigation_button_text is gui_button_text
@@ -334,11 +317,46 @@ screen main_menu():
 
         if main_menu:
             
-            textbutton _("Bắt đầu") action Start()
-            textbutton _("Tiếp tục") action ShowMenu("load")
-            textbutton _("Cài đặt") action ShowMenu("preferences")
-            textbutton _("Trợ giúp") action ShowMenu("help")
-            textbutton _("Thoát") action Quit(confirm=not main_menu)
+            button:
+                style "button_main"
+                text _("Bắt đầu"):
+                    size gui.interface_text_size
+                    color gui.interface_text_color
+                    xalign 0.5
+                    yalign 0.3    
+                action Start()
+            button:
+                style "button_main"
+                text _("Tiếp tục"):
+                    size gui.interface_text_size
+                    color gui.interface_text_color
+                    xalign 0.5
+                    yalign 0.3    
+                action ShowMenu("load")
+            button:
+                style "button_main"
+                text _("Cài đặt"):
+                    size gui.interface_text_size
+                    color gui.interface_text_color
+                    xalign 0.5
+                    yalign 0.3    
+                action ShowMenu("preferences")
+            button:
+                style "button_main"
+                text _("Trợ giúp"):
+                    size gui.interface_text_size
+                    color gui.interface_text_color
+                    xalign 0.5
+                    yalign 0.3    
+                action ShowMenu("help")   
+            button:
+                style "button_main"
+                text _("Thoát"):
+                    size gui.interface_text_size
+                    color gui.interface_text_color
+                    xalign 0.5
+                    yalign 0.3    
+                action Quit(confirm=True)
         else:
 
             vbox:
@@ -363,7 +381,12 @@ style main_menu_vbox is vbox
 style main_menu_text is gui_text
 style main_menu_title is main_menu_text
 style main_menu_version is main_menu_text
-
+style button_main is  default
+style button_main:
+    xsize 288
+    ysize 128
+    background Frame("gui/button/button_main.png", gui.namebox_borders, tile=gui.namebox_tile, xalign=gui.button_xalign)
+    padding gui.namebox_borders.padding
 style main_menu_frame:
     xsize 420
     yfill True
@@ -602,26 +625,35 @@ screen file_slots(title):
                 xalign 0.5
                 yalign 0.5
 
-                spacing gui.slot_spacing
+                spacing 30
 
                 for i in range(gui.file_slot_cols * gui.file_slot_rows):
 
                     $ slot = i + 1
-                    
-                    button:
-                        action FileAction(slot)
 
-                        has vbox
+                    hbox:
+                        hbox:   
+                            button:
+                                action FileAction(slot)
+                                has vbox
+                                
+                                text FileTime(slot, format=_("%B %d %Y, %H:%M"), empty=_("")):
+                                    style "slot_time_text"
                         
-                        add FileScreenshot(slot) xalign 0.5
-
-                        text FileTime(slot, format=_("{#file_time}%A, %B %d %Y, %H:%M"), empty=_("")):
-                            style "slot_time_text"
-
-                        text FileSaveName(slot):
-                            style "slot_name_text"
-                        
-                        key "save_delete" action FileDelete(slot)
+                                add FileScreenshot(slot):
+                                    ypos 10
+                                
+                                imagebutton:
+                                    xpos 350
+                                    ypos -250
+                                    auto "gui/button/x_%s.png" action FileDelete(slot)
+                                
+                                
+                                text FileSaveName(slot):
+                                    style "slot_name_text" 
+                                key "save_delete" action FileDelete(slot)
+                            
+                       
 
             ## Buttons to access other pages.
             vbox:
@@ -682,6 +714,9 @@ style slot_button_text is gui_button_text
 style slot_time_text is slot_button_text
 style slot_name_text is slot_button_text
 
+style frame is default
+
+
 style page_label:
     xpadding 75
     ypadding 20
@@ -707,8 +742,8 @@ style slot_button:
     properties gui.button_properties("slot_button")
 
 style slot_button_text:
-    properties gui.button_text_properties("slot_button")
     size gui.text_time_size
+    color gui.idle_color
  
     
 
@@ -741,7 +776,6 @@ screen preferences():
                         textbutton _("Toàn màn hình") action Preference("display", "fullscreen")
                     
                     vbox:
-
                         style_prefix "check"
                         label _("Bỏ qua")
                         textbutton _("Thoại chưa đọc") action Preference("skip", "toggle")
@@ -763,7 +797,7 @@ screen preferences():
 
                     bar value Preference("text speed")
 
-                    label _("Tốc độ tự đọc")
+                    label _("Tốc độ tự động đọc")
 
                     bar value Preference("auto-forward time")
 
@@ -869,8 +903,6 @@ style slider_button:
 
 style slider_button_text:
     properties gui.button_text_properties("slider_button")
-    
-    
 
 style slider_vbox:
     xsize 675
@@ -999,7 +1031,6 @@ screen help():
             spacing 23
             
             hbox:
-
                 textbutton _("Keyboard") action SetScreenVariable("device", "keyboard")
                 textbutton _("Mouse") action SetScreenVariable("device", "mouse")
 
@@ -1165,26 +1196,31 @@ screen confirm(message, yes_action, no_action):
     zorder 200
 
     style_prefix "confirm"
-
     add "gui/overlay/confirm.png"
-
     frame:
 
         vbox:
             xalign .5
             yalign .5
             spacing 45
-
             label _(message):
                 style "confirm_prompt"
                 xalign 0.5
 
             hbox:
                 xalign 0.5
-                spacing 150
-
-                textbutton _("Yes") action yes_action
-                textbutton _("No") action no_action
+                spacing 50
+                imagebutton:
+                    xalign 0.2
+                    yalign 0.5
+                    auto "gui/button/button_yes_%s.png" action yes_action
+                imagebutton:
+                    xalign 0.2
+                    yalign 0.5
+                    auto "gui/button/button_no_%s.png" action no_action
+                    
+                
+    
 
     ## Right-click and escape answer "no".
     key "game_menu" action no_action
@@ -1197,7 +1233,7 @@ style confirm_button is gui_medium_button
 style confirm_button_text is gui_medium_button_text
 
 style confirm_frame:
-    background Frame([ "gui/confirm_frame.png", "gui/frame.png"], gui.confirm_frame_borders, tile=gui.frame_tile)
+    background Frame(["gui/box_confirm.png","gui/confirm_frame.png"], gui.confirm_frame_borders, tile=gui.frame_tile)
     padding gui.confirm_frame_borders.padding
     xalign .5
     yalign .5
@@ -1205,6 +1241,7 @@ style confirm_frame:
 style confirm_prompt_text:
     textalign 0.5
     layout "subtitle"
+    color gui.text_color
 
 style confirm_button:
     properties gui.button_properties("confirm_button")
@@ -1230,7 +1267,7 @@ screen skip_indicator():
         hbox:
             spacing 9
 
-            text _("Skipping")
+            text _("Đang bỏ qua")
 
             text "▸" at delayed_blink(0.0, 1.0) style "skip_triangle"
             text "▸" at delayed_blink(0.2, 1.0) style "skip_triangle"
@@ -1626,7 +1663,7 @@ style slider_slider:
 
 
 style splash_text:
-    size 32
+    size 60
     color "#000"
     font gui.text_font
     text_align 0.5

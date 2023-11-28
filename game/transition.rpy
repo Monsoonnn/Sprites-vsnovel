@@ -26,6 +26,11 @@ transform rightin(x=640):
     pause 1.5
     linear 2 xcenter -800
 
+transform tillup(y=640):
+    ycenter x xoffset 0 xanchor 1.0 xpos 1.00 alpha 1.00 subpixel True
+    pause 1.5
+    linear 2 ycenter -800
+
 
 
 # define wipeleft_scene = MultipleTransition([

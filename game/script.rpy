@@ -6,3 +6,4 @@ label start:
     call begin_main
 
 return
+

@@ -1,0 +1,10 @@
+﻿I'm sorry, but errors were detected in your script. Please correct the
+errors listed below, and try again.
+
+
+File "game/screen_op2.rpy", line 43: expected end of line
+    stop sound with fadeout 0.3
+               ^
+
+Ren'Py Version: Ren'Py 8.1.1.23060707
+Wed Nov 29 01:55:26 2023

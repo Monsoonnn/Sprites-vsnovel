@@ -20,11 +20,14 @@ label begin_main:
     stop music fadeout 2.0
     scene bg sc0_5 with fade_scene_full
     play music audio.bgm2
+    play sound audio.foot volume 0.5 loop
+
     "Hôm nay là một buổi sáng chủ nhật."
     "Thời tiết đã bắt đầu sang đông."
     "Đáng lẽ ra bây giờ cậu thanh niên này đang say giấc trên giường hay ít ra cũng phải nằm dài và lướt điện thoại."
     "Nếu không vì cái quy định hết sức oái oăm mà phía Chính Phủ vừa ban hành."
     "Toàn bộ nhân viên của các tổ chức ma thuật phải kê khai rõ lý lịch như công chức nhà nước, hạn là thứ hai tuần sau và và hôm nay là chủ nhật."
+    stop sound
     scene bg sc0_6 with normal
     "Trong cái thế giới đầy rẫy sự bất ổn này, ma thuật là thứ công khai, tồn tại bình thường trong đời sống."
     scene bg sc0_7 with normal
@@ -34,10 +37,17 @@ label begin_main:
     "Dẫu cho thế sự có đảo chiều, thiên hạ có thay đổi, công việc của họ vẫn vậy."
     scene bg sc0_8 with normal
     "Trong cái thành phố bé nhỏ này tồn tại hai tổ chức: Hiệp hội trừ tà, Hiệp hội nghiên cứu và phát triển ma thuật."
+    "Mặc dù đều là tổ chức ma thuật và ở cùng một thành phố. Song hai Hiệp hội trên có hướng phát triển riêng."
+    "Hiệp hội trừ tà thiên về tiêu diệt sinh vật siêu nhiên. Vậy nên họ chủ yếu phát triển ma thuật khắc chế sinh vật siêu nhiên, những ma thuật khác chỉ là phụ."
+    "Hiệp hội nghiên cứu và phát triển ma thuật lại thiên về bảo tồn và phát triển tất cả các loại ma thuật để phục vụ cho nhiều mục đích."
+    "Nói chung là phong phú và đa dạng hơn nhiều. Nhân sự phía bên này cũng ít khép kín, có phần năng động và cởi mở hơn."
+    "Tuy có nhiều lần hợp tác nhưng nhân viên hai bên ít qua lại với nhau vì đặc tính công việc cũng như phong cách làm việc khác nhau."
+    "Dù không như chó với mèo, song hễ có dịp là hai bên cũng nói xấu bên kia dăm ba câu. Thỉnh thoảng cũng có khẩu chiến qua lại nhưng chưa động chân động tay gì."
     "Được ví như mặt trăng và mặt trời của thành phố, bảo vệ thành phố 24/7. Các tổ chức trên tương đương với một cơ quan nhà nước."
     scene bg sc0_9 with normal
     "Do mang trong mình nguyên tố hiếm, là khắc tinh của sinh vật siêu nhiên nên cậu được Hiệp hội trừ tà mời gia nhập khi vừa đủ 18."
     "Vậy nên mới có cơ sự ngày hôm nay."
+
     scene bg sc1_1 with normal
     show v1 zorder 3 at center 
     show xe2 zorder 2 at lout
@@ -46,6 +56,7 @@ label begin_main:
     show la2 
     show la3 
     show la4 
+    play sound car_moving volume 0.5 
     "Trước giờ đâu có chuyện này."
     "Nhưng cũng chịu thôi, Chính Phủ luôn dành cho giới pháp sư một mối quan tâm đặc biệt. Nhất là sau sự kiện 5 năm về trước."
     "Nếu đao kiếm hạ sát được một người, súng đạn được mười người thì ma thuật sẽ được cả trăm, cả nghìn người."
@@ -75,14 +86,30 @@ label begin_main:
     "Hiệp hội trừ tà vẫn nhanh chân hơn một bước chiêu mộ được cô từ hồi cô chưa đủ tuổi gia nhập."
     "Sở trường về kết giới và dịch chuyển của cô rất phù hợp cho vai trò hỗ trợ trong chiến đấu. Song khả năng dung hợp với linh miêu mới là thứ mà Hiệp hội để ý tới."
     "Nổi tiếng là người coi trọng giờ giấc, tinh thần kỷ luật cao, cô luôn là cánh tay phải cho các sếp trong hiệp hội."
+    
     scene bg sc1_2 with normal
     show v4 zorder 3
+    play sound phone_ring loop volume 0.5
+    "..."
     
     "Không cần nhìn tên, cậu cũng biết là ai. Người này công nhận cũng thiêng thật."
-    hide v4
-    show v3 zorder 3
+    menu:
+        "Thuê bao quý khách vừa gọi, hiện không liên lạc được.":
+            stop sound
+            v "Thuê bao quý khách vừa gọi, hiện không liên lạc được."
+            scene bg sc1_3
+            show n3 zorder 3 
+            n "Tôi có thể ship cho ông một lời nguyền trong bán kính 3km đấy."
+            scene bg sc1_2 
+            show v5 zorder 3
+            v "Em xin lỗi chị ạ!"
+            
+        "Alo, tôi đây":
+            stop sound
+            hide v4
+            show v3 zorder 3
+            v "Alo, tôi đây"
     
-    v "Alo, tôi đây."
     scene bg sc1_3 
     show n1 
     n "Có biết mấy giờ rồi không? Mọi người có mặt ở ga tàu hết rồi này, thiếu mỗi ông thôi đấy."
@@ -100,11 +127,16 @@ label begin_main:
     scene bg sc1_4
     show v4
     play music audio.bgm3
+
+    play sound foot loop volume 0.5
     "Cậu nhìn ngang ngó dọc, nãy giờ suy nghĩ vu vơ nên cũng quên luôn mình đang ở đâu."
     v "Ờ... thì... Tôi đang đứng trước cổng trường mình."
     hide v4 with normal
+    stop sound 
     "Cậu dừng chân lại, nhìn vào phía bên trong trường."
     "Hôm nay là chủ nhật, không có ai cả. Trường không một bóng người."
+
+    play sound wind loop volume 1.5
     "Một cảm giác khá kỳ lạ lướt qua cậu."
     "Có cái gì đó gợn lên trong đầu cậu, một cảm giác vừa lạ vừa quen. "
     show v3 
@@ -112,6 +144,7 @@ label begin_main:
     v "Là kết giới."
     scene bg sc1_3 
     show n1 
+    stop sound
     n "Nói gì đấy ?"
 
     scene bg sc1_4

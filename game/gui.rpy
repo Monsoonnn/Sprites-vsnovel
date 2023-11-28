@@ -10,6 +10,7 @@ init offset = -2
 ## width and height of the game.
 init python:
     gui.init(1920, 1080)
+    
 
 ## Enable checks for invalid or unstable properties in screens or transforms
 define config.check_conflicting_properties = True
@@ -123,6 +124,7 @@ define gui.name_ypos = -80
 ## The horizontal alignment of the character's name. This can be 0.0 for left-
 ## aligned, 0.5 for centered, and 1.0 for right-aligned.
 define gui.name_xalign = 0.0
+define gui.button_xalign = 0.5
 
 ## The width, height, and borders of the box containing the character's name, or
 ## None to automatically size it.
@@ -215,10 +217,10 @@ define gui.quick_button_text_selected_color = gui.accent_color
 ##
 ## Choice buttons are used in the in-game menus.
 
-define gui.choice_button_width = 1185
+define gui.choice_button_width = 1300
 define gui.choice_button_height = None
 define gui.choice_button_tile = False
-define gui.choice_button_borders = Borders(150, 8, 150, 8)
+define gui.choice_button_borders = Borders(100, 8, 100, 8)
 define gui.choice_button_text_font = gui.text_font
 define gui.choice_button_text_size = gui.text_size
 define gui.choice_button_text_xalign = 0.5
@@ -271,7 +273,7 @@ define gui.notify_ypos = 68
 define gui.choice_spacing = 33
 
 ## Buttons in the navigation section of the main and game menus.
-define gui.navigation_spacing = 80
+define gui.navigation_spacing = 50
 
 ## Controls the amount of spacing between preferences.
 define gui.pref_spacing = 15
@@ -425,8 +427,9 @@ define gui.language = "unicode"
 ## Mobile devices
 ################################################################################
 
-init python:
 
+init python:
+    
     ## This increases the size of the quick buttons to make them easier to touch
     ## on tablets and phones.
     @gui.variant

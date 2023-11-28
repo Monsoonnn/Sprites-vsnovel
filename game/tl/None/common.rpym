@@ -331,11 +331,11 @@ translate None strings:
 
     # renpy/common/00action_file.rpy:944
     old "Quick save."
-    new "Quick save."
+    new "Lưu nhanh"
 
     # renpy/common/00action_file.rpy:963
     old "Quick load."
-    new "Quick load."
+    new "Tải nhanh tiến độ"
 
     # renpy/common/00action_other.rpy:381
     old "Language [text]"
@@ -451,27 +451,27 @@ translate None strings:
 
     # renpy/common/00gui.rpy:446
     old "Are you sure?"
-    new "Are you sure?"
+    new "Bạn chắc không ?"
 
     # renpy/common/00gui.rpy:447
     old "Are you sure you want to delete this save?"
-    new "Are you sure you want to delete this save?"
+    new "Bạn chắc chắn muốn xóa không ?"
 
     # renpy/common/00gui.rpy:448
     old "Are you sure you want to overwrite your save?"
-    new "Are you sure you want to overwrite your save?"
+    new "Bạn có muốn ghi đè tiến độ này?\nViệc này sẽ không thể khôi phục tiến độ trước đó"
 
     # renpy/common/00gui.rpy:449
     old "Loading will lose unsaved progress.\nAre you sure you want to do this?"
-    new "Loading will lose unsaved progress.\nAre you sure you want to do this?"
+    new "Tải tiến độ mới sẽ không lưu tiến độ hiện tại\nBạn có chắc muốn thực hiện không?"
 
     # renpy/common/00gui.rpy:450
     old "Are you sure you want to quit?"
-    new "Are you sure you want to quit?"
+    new "Bạn có chắn chắn muốn thoát không ?"
 
     # renpy/common/00gui.rpy:451
     old "Are you sure you want to return to the main menu?\nThis will lose unsaved progress."
-    new "Are you sure you want to return to the main menu?\nThis will lose unsaved progress."
+    new "Bạn có chắc muốn quay về màn hình chính?\nViệc này sẽ không lưu tiến độ trò chơi"
 
     # renpy/common/00gui.rpy:452
     old "Are you sure you want to end the replay?"
