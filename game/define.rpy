@@ -31,6 +31,8 @@ define audio.phone_ring = "sound/phone_ring.mp3"
 define audio.running = "sound/running.mp3"
 define audio.wind = "sound/wind.mp3"
 define audio.vehicles = "sound/vehicles.mp3"
+define audio.Electric = "sound/Electric.mp3"
+define audio.glass_break = "sound/glass_break.mp3"
 
 
 # define audio.bell = 
@@ -93,9 +95,49 @@ image bg op2_11:
         ease 0.2 yalign 0.00
         yalign 0
 
+image bg_1 = "BG/148.png"
+image bg_2 = "BG/162.png"
 
 image bg op3_1 = "bg_op3/1.png"
 image bg op3_2 = "bg_op3/2.png"
+image bg op3_3 = "bg_op3/3.png"
+image bg op3_4 = "bg_op3/4.png"
+image bg op3_5 = "bg_op3/5.png"
+image bg op3_6 = "bg_op3/6.png"
+image bg op3_7 = "bg_op3/7.png"
+image bg op3_8 = "bg_op3/8.png"
+image bg op3_9 = "bg_op3/9.png"
+image bg op3_10 = "bg_op3/10.png"
+image bg op3_11 = "bg_op3/11.png"
+image bg op3_12 = "bg_op3/12.png"
+image bg op3_13 = "bg_op3/13.png"
+image bg op3_14 = "bg_op3/14.png"
+image bg op3_15 = "bg_op3/15.png"
+image bg op3_16 = "bg_op3/16.png"
+image bg op3_17 = "bg_op3/17.png"
+image bg op3_18 = "bg_op3/18.png"
+image bg op3_19 = "bg_op3/19.png"
+image bg op3_20 = "bg_op3/20.png"
+image bg op3_21 = "bg_op3/21.png"
+image bg op3_22 = "bg_op3/22.png"
+image bg op3_23 = "bg_op3/23.png"
+image bg op3_24 = "bg_op3/24.png"
+image bg op3_25 = "bg_op3/25.png"
+image bg op3_26 = "bg_op3/26.png"
+image bg op3_27 = "bg_op3/27.png"
+image bg op3_28 = "bg_op3/28.png"
+image bg op3_29 = "bg_op3/29.png"
+image bg op3_30 = "bg_op3/30.png"
+image bg op3_31 = "bg_op3/31.png"
+image bg op3_32 = "bg_op3/32.png"
+image bg op3_33 = "bg_op3/33.png"
+image bg op3_34 = "bg_op3/34.png"
+image bg op3_35 = "bg_op3/35.png"
+image bg op3_36 = "bg_op3/36.png"
+image bg op3_37 = "bg_op3/37.png"
+image bg op3_38 = "bg_op3/38.png"
+image bg op3_39 = "bg_op3/39.png"
+image bg op3_40 = "bg_op3/40.png"
 
 # image background
 
@@ -112,16 +154,28 @@ image v6 = "viet/15.png"
 image v7 = "viet/16.png"
 image v8 = "viet/17.png"
 image v9 = "viet/18.png"
+image v10 = "viet/19.png"
+image v11 = "viet/20.png"
+image v12 = "viet/21.png"
 
 image n1 = "ngan/23a.png"
 image n2 = "ngan/24aa.png"
 image n3 = "ngan/33.2a.png"
+image n4 = "ngan/1.png"
+image n5 = "ngan/2.png"
+image n6 = "ngan/3.png"
+image n7 = "ngan/4.png"
+image n8 = "ngan/5.png"
+image n9 = "ngan/6.png"
 
 image g1 ="giang/1.png"
 image g2 ="giang/2.png"
 image g3 ="giang/3.png"
 image g4 ="giang/4.png"
 image g5 ="giang/5.png"
+image g6 ="giang/6.png"
+image g7 ="giang/7.png"
+image g8 ="giang/8.png"
 ##image character
 #image mat
 
@@ -147,6 +201,7 @@ image ctc:
 define narrator = Character(ctc="ctc", ctc_position="fixed")
 define v = DynamicCharacter('v_name', image='v', what_prefix='"', what_suffix='"', ctc="ctc", ctc_position="fixed",color="#fff")
 define none = DynamicCharacter('none', image='n', what_prefix='"', what_suffix='"', ctc="ctc", ctc_position="fixed")
+define v_a_g = DynamicCharacter('v_a_g', image='v_a_g', what_prefix='"', what_suffix='"', ctc="ctc", ctc_position="fixed")
 define n = DynamicCharacter('n_name', image='v', what_prefix='"', what_suffix='"', ctc="ctc", ctc_position="fixed", color="#fff")
 define g = DynamicCharacter('g_name', image='g', what_prefix='"', what_suffix='"', ctc="ctc", ctc_position="fixed", color="#fff")
 
@@ -155,6 +210,7 @@ default v_name = "Việt"
 default n_name = "Ngân"
 default none = "???"
 default g_name = "Giang"
+default v_a_g = "Việt/Giang"
 
 
 

@@ -27,8 +27,8 @@ label op1:
     "Cậu băng băng trên con đường vắng vẻ, dù rằng ngày thường ở đây đông như quân Nguyên."
 
     "..." 
-    $ renpy.music.play("sound/heart_beat.mp3", channel="sfx2", relative_volume = 0.2, fadeout=0.5)
     scene bg op1_2 with fadein
+    $ renpy.music.play("sound/heavy_breathing.mp3", channel="sfx2", relative_volume = 0.2, fadeout=0.5)
     "Vừa chạy vừa thở gấp, cậu thấy hôm nay sức mình đuối hơn so với mọi ngày."
 
     "Dù sao thì chủ nhật các tuần phải là ngày cậu hồi sức chứ không phải là chạy như bay rồi ngồi chờ cả tiếng thế này."
@@ -38,15 +38,16 @@ label op1:
     "Thấp thoáng từ xa, cậu thấy bóng dáng bạn mình."
 
     "Cậu vẫy tay gọi bạn."
-    stop music fadeout 2.0
+ 
 
     scene bg op1_4 with normal 
-    
-    play music audio.bgm4
+    stop music fadeout 1
+    play music audio.bgm4 fadein 1
 
     $ renpy.music.set_pause(True,"sfx1")
+    $ renpy.music.set_pause(True,"sfx2")
     v " Hự."
-
+    $ renpy.music.play("sound/heart_beat.mp3", channel="sfx2", relative_volume = 0.3, fadeout=0.5)
     "Cậu đột nhiên không còn sức và khụy gối xuống."
 
     "Cảm giác như ai đó rút cạn hết năng lượng của cậu vậy."

@@ -241,7 +241,7 @@ screen quick_menu():
             xalign 0.5
             yalign 1.0
 
-            textbutton _("Quay lại") action Rollback()
+            # textbutton _("Quay lại") action Rollback()
             textbutton _("Bỏ qua") action Skip() alternate Skip(fast=True, confirm=True)
             textbutton _("Lịch sử") action ShowMenu('history')
             textbutton _("Tự động") action Preference("auto-forward", "toggle")
@@ -499,6 +499,9 @@ style game_menu_label_text is gui_label_text
 style return_button is navigation_button
 style return_button_text is navigation_button_text
 
+style title_text:
+    color gui.hover_color
+
 style game_menu_outer_frame:
 
     background "gui/overlay/game_menu.png"
@@ -526,10 +529,12 @@ style game_menu_label:
     ysize 120
     xalign 0.5
     yalign 0.03
+    
 
 style game_menu_label_text:
     size gui.title_text_size_big
-    color gui.text_color
+    outlines [(0.2, "#216EB6", 0.2, 0.2)]
+    color gui.hover_color
     yalign 0.5
 
 style return_button:
@@ -725,7 +730,8 @@ style page_label_text:
     textalign 0.5
     layout "subtitle"
     size gui.text_size
-    color gui.text_color
+    color gui.hover_color
+    outlines [(0.2, "#216EB6", 0.2, 0.2)]
     
 
 style page_button:
@@ -733,6 +739,7 @@ style page_button:
 
 style page_button_text:
     properties gui.button_text_properties("page_button")
+    
     color gui.text_color
     hover_color gui.hover_color
     selected_color gui.selected_color
@@ -1031,8 +1038,8 @@ screen help():
             spacing 23
             
             hbox:
-                textbutton _("Keyboard") action SetScreenVariable("device", "keyboard")
-                textbutton _("Mouse") action SetScreenVariable("device", "mouse")
+                textbutton _("Bàn phím") action SetScreenVariable("device", "keyboard")
+                textbutton _("Chuột") action SetScreenVariable("device", "mouse")
 
                 if GamepadExists():
                     textbutton _("Gamepad") action SetScreenVariable("device", "gamepad")
@@ -1048,75 +1055,67 @@ screen help():
 screen keyboard_help():
 
     hbox:
-        label _("Enter")
-        text _("Advances dialogue and activates the interface.")
+        label _("Phím Enter")
+        text _("Tiếp tục hội thoại hoặc kích hoạt giao diện")
 
     hbox:
-        label _("Space")
-        text _("Advances dialogue without selecting choices.")
+        label _("Phím Space")
+        text _("Tiếp tục hội thoại mà không cần lựa chọn")
 
     hbox:
-        label _("Arrow Keys")
-        text _("Navigate the interface.")
+        label _("Phím mũi tên")
+        text _("Điều hướng giao diện")
 
     hbox:
-        label _("Escape")
-        text _("Accesses the game menu.")
+        label _("Phím Esc")
+        text _("ruy cập menu")
 
     hbox:
-        label _("Ctrl")
-        text _("Skips dialogue while held down.")
+        label _("Phím Ctrl")
+        text _("Bỏ qua hội thoại khi gi")
 
     hbox:
-        label _("Tab")
-        text _("Toggles dialogue skipping.")
+        label _("Phím Tab")
+        text _("Chuyển đổi chế độ bỏ qua hội thoại")
 
     hbox:
-        label _("Page Up")
-        text _("Rolls back to earlier dialogue.")
+        label _("Phím Page Up")
+        text _("Quay lại đoạn hội thoại trước đó")
 
     hbox:
-        label _("Page Down")
-        text _("Rolls forward to later dialogue.")
+        label _("Phím Page Down")
+        text _("Chuyển tới đoạn hội thoại phía sau")
 
     hbox:
-        label "H"
-        text _("Hides the user interface.")
+        label "Phím H"
+        text _("Ẩn giao diện")
 
     hbox:
-        label "S"
-        text _("Takes a screenshot.")
-
-    hbox:
-        label "V"
-        text _("Toggles assistive {a=https://www.renpy.org/l/voicing}self-voicing{/a}.")
-
-    hbox:
-        label "Shift+A"
-        text _("Opens the accessibility menu.")
+        label "Phím S"
+        text _("Chụp màn hình")
 
 
 screen mouse_help():
 
     hbox:
-        label _("Left Click")
-        text _("Advances dialogue and activates the interface.")
+        label _("Chuột trái")
+        text _("Tiếp tục hội thoại hoặc kích hoạt giao diện")
 
     hbox:
-        label _("Middle Click")
-        text _("Hides the user interface.")
+        label _("Chuột giữa")
+        text _("Ẩn giao diện")
 
     hbox:
-        label _("Right Click")
-        text _("Accesses the game menu.")
+        label _("Chuột phải")
+        text _("Truy cập Lưu")
 
     hbox:
-        label _("Mouse Wheel Up\nClick Rollback Side")
-        text _("Rolls back to earlier dialogue.")
+        label _("Lăn chuột giữa Lên")
+        text _("Quay lại đoạn hội thoại trước đó")
 
     hbox:
-        label _("Mouse Wheel Down")
-        text _("Rolls forward to later dialogue.")
+        label _("Lăn chuột giữa xuống")
+        text _("Chuyển tới đoạn hội thoại phía sau")
 
 
 screen gamepad_help():
@@ -1157,24 +1156,27 @@ style help_text is gui_text
 
 style help_button:
     properties gui.button_properties("help_button")
-
-    xmargin 120
+    xmargin 50
 
 style help_button_text:
     properties gui.button_text_properties("help_button")
-    color gui.text_color
+    color gui.hover_color
+    hover_color gui.selected_color
+    
 
 style help_label:
     xsize 375
-    right_padding 30
+    xpos 60
+    right_padding 100
 
 style help_label_text:
     size gui.text_help_size
-    xalign 0.5
+    xalign 1
     color gui.text_color
-    textalign 1.0
-
-
+    textalign 0.5
+style help_text:
+    size gui.text_help_size
+    color gui.text_color
 
 ################################################################################
 ## Additional screens

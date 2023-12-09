@@ -75,7 +75,7 @@ define gui.interface_text_font = "./font/big-shoulders-display.regular.ttf"
 define gui.text_size = 55
 define gui.text_time_size = 30
 define gui.text_history_size = 40
-define gui.text_help_size = 35
+define gui.text_help_size = 40
 define gui.text_quick_size = 40
 define gui.text_label_settings = 55
 

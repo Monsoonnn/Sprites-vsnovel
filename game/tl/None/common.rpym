@@ -327,7 +327,7 @@ translate None strings:
 
     # renpy/common/00action_file.rpy:929
     old "Quick save complete."
-    new "Quick save complete."
+    new "Lưu nhanh thành công"
 
     # renpy/common/00action_file.rpy:944
     old "Quick save."
