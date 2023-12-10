@@ -308,7 +308,8 @@ label op3:
     show n7
     n "Thứ hai là còn 10 phút nữa, nó sẽ tự hủy."
 
-    scene bg op3_24
+    scene bg op3_25
+
     v_a_g "HẢ?"
 
     scene bg_1
@@ -318,6 +319,7 @@ label op3:
     n "Tôi không tiến vào trong được. Có gì tôi sẽ hỗ trợ sau"
 
     scene bg op3_21
+    play music bgm8 fadein 2
     "Ở phía bên trong, con yêu tinh đã lấy lại được sự ổn định của dòng ma lực."
 
     scene bg op3_22
@@ -460,10 +462,10 @@ label op3:
     v "May mà kịp. ."
 
     hide v10
-    show g6
+    show g7
     g "Cảm ơn nhé! Chậm một chút thôi là tôi thủng màng nhĩ rồi."
 
-    hide g6
+    hide g7
     show n8 zorder 3 at left
     show v11 zorder 1 at right
     "“Thủng màng nhĩ? Chỉ thế thôi á?” Đó là những gì hai người nghĩ trong đầu."
@@ -480,10 +482,10 @@ label op3:
     g "Mới cắt tóc à cô nương?"
 
     hide g8
-    show n2
+    show n9
     n "À thì ..."
 
-    hide n2
+    hide n9
     show v11
     v "Nó thua cá cược với sếp bên bộ phận nghiên cứu nên hiến bộ tóc cho bên đó rồi."
 
@@ -506,10 +508,10 @@ label op3:
     g "Tôi phải sửa lại con rối thôi, nó hỏng ghê quá. Phải thay lõi năng lượng mới rồi."
     
     hide g7
-    show n2
+    show n9
     n "Tôi sẽ chuyển lời lại"
 
-    hide n2
+    hide n9
     show g7
     g "Kinh phí tăng gấp đôi nhé!"
 

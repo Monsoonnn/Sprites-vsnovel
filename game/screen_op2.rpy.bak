@@ -316,6 +316,6 @@ label op2:
     show g5
     g "Được thôi. Hứa đấy."
     stop music fadeout 5
-    call op3 from _call_op3
+    call op3
 
 return

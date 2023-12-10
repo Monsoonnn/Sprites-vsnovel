@@ -385,7 +385,8 @@ style button_main is  default
 style button_main:
     xsize 288
     ysize 128
-    background Frame("gui/button/button_main.png", gui.namebox_borders, tile=gui.namebox_tile, xalign=gui.button_xalign)
+    idle_background Frame("gui/button/button_main.png", gui.namebox_borders, tile=gui.namebox_tile, xalign=gui.button_xalign)
+    hover_background Frame("gui/button/button_main_hover.png", gui.namebox_borders, tile=gui.namebox_tile, xalign=gui.button_xalign)
     padding gui.namebox_borders.padding
 style main_menu_frame:
     xsize 420

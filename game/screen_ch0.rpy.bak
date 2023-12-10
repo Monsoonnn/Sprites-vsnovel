@@ -169,9 +169,9 @@ label begin_main:
     "Nhưng cũng tại nhiệm vụ của họ nhiều quá, làm gì có thời gian mà tạt qua trụ sở."
     menu:
         "Đi đến điểm hẹn và báo cáo lại cho Hiệp hội.":
-            call op1 from _call_op1
+            call op1
         "Vào bên trong trường":
-            call op2 from _call_op2
+            call op2
 
             
 return
